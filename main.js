@@ -80,6 +80,10 @@ function getImageUrls(data) {
         // works
         generateCarouselImages(imagesArray);
         //alert(imagesArray);
+
+        // Display video
+        console.log("Display the video here: ", data["Video Url"]);
+        displayVideo(data["Video Url"]);
         
       }
     })
@@ -90,6 +94,35 @@ function getImageUrls(data) {
 
   console.log('Sending data to the backend:', data);
 }
+
+// Function to display video
+// Function to display video
+function displayVideo(videoUrl) {
+  const videoDisplay = document.getElementById('videoDisplay');
+
+  // Apply the CSS styles to the videoDisplay element
+  videoDisplay.style.width = '100%';
+  videoDisplay.style.height = '200px';
+  videoDisplay.style.backgroundColor = '#fff';
+  videoDisplay.style.display = 'flex';
+  videoDisplay.style.alignItems = 'center';
+  videoDisplay.style.justifyContent = 'center';
+  videoDisplay.style.borderRadius = '8px';
+  videoDisplay.style.overflow = 'hidden'; // Optional: Ensures that the video doesn't overflow the container
+
+  // Check if the videoUrl is valid
+  if (videoUrl) {
+    videoDisplay.innerHTML = `
+      <video width="100%" height="100%" controls>
+        <source src="${videoUrl}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    `;
+  } else {
+    videoDisplay.innerHTML = 'No video available.';
+  }
+}
+
 
 // Function to dynamically generate carousel images
 function generateCarouselImages(images) {

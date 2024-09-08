@@ -168,12 +168,7 @@ textarea:focus {
   border-radius: 8px;
 }
 
-#videoDisplay::before {
-  content: "Your cat video will appear here!";
-  color: #888;
-  font-size: 1.25rem;
-  font-family: 'Comic Sans MS', cursive;
-}
+
 
 /* Submit Button */
 #submitButton {
