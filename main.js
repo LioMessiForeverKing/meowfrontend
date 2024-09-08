@@ -25,28 +25,67 @@ function consoleLogFormData(data) {
 
 // Function to send data to the backend
 function sendDataToBackend(data) {
-  // Pseudo code for sending data to a Python backend
-  // Use 'fetch' API to POST data to the backend
   fetch('http://your-backend-url/endpoint', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json', // Inform backend we're sending JSON data
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data), // Convert JavaScript object to JSON string
+    body: JSON.stringify(data),
   })
-  .then(response => response.json()) // Assuming backend returns a JSON response
+  .then(response => response.json())
   .then(data => {
-    console.log('Success:', data); // Handle the response data here
+    console.log('Success:', data);
   })
   .catch((error) => {
-    console.error('Error:', error); // Handle errors here
+    console.error('Error:', error);
   });
 }
 
+// Function to dynamically generate carousel images
+function generateCarouselImages(images) {
+  const carouselInner = document.getElementById('carouselInner');
+  carouselInner.innerHTML = ''; // Clear existing content
+
+  // Loop to create the image elements
+  images.forEach((imageSrc, index) => {
+    const carouselItem = document.createElement('div');
+    carouselItem.classList.add('carousel-item');
+    if (index === 0) carouselItem.classList.add('active'); // Make the first item active by default
+
+    const img = document.createElement('img');
+    img.src = imageSrc;
+    img.alt = `Cute Cat ${index + 1}`;
+
+    carouselItem.appendChild(img);
+    carouselInner.appendChild(carouselItem);
+  });
+}
+
+// Variables to track the current carousel index
+let currentIndex = 0;
+let totalImages = 5; // Fixed number of images (5 cat images)
+
+// Function to move to the next image
+function nextImage() {
+  const carouselInner = document.getElementById('carouselInner');
+  currentIndex = (currentIndex + 1) % totalImages;
+  carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+// Function to move to the previous image
+function prevImage() {
+  const carouselInner = document.getElementById('carouselInner');
+  currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+  carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+// Event listeners for carousel controls
+document.getElementById('nextBtn').addEventListener('click', nextImage);
+document.getElementById('prevBtn').addEventListener('click', prevImage);
+
 // Event listener for when the user submits the form
 document.addEventListener('DOMContentLoaded', () => {
-  // Assuming there is a button to submit
-  const submitButton = document.getElementById('submitButton'); // Replace with actual button ID
+  const submitButton = document.getElementById('submitButton');
 
   if (submitButton) {
     submitButton.addEventListener('click', (event) => {
@@ -57,24 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
       sendDataToBackend(formData); // Send data to backend
     });
   }
+  images = [
+    'https://cdn2.thecatapi.com/images/MTYwNjA2OA.jpg',
+    'https://cdn2.thecatapi.com/images/MTYwNjA2OA.jpg',
+    'https://cdn2.thecatapi.com/images/MTYwNjA2OA.jpg',
+    'https://cdn2.thecatapi.com/images/MTYwNjA2OA.jpg',
+    'https://cdn2.thecatapi.com/images/MTYwNjA2OA.jpg',
+  ]
+
+  // Generate carousel with 5 cat images
+  generateCarouselImages(images);
 });
-
-/*
-Python Backend Pseudo Code:
-
-# Import necessary modules (like Flask, FastAPI, or Django)
-
-# Define an endpoint to receive data
-def receive_data_endpoint():
-    # Parse the incoming JSON data
-    # Example using Flask:
-    # data = request.get_json()
-    
-    # Process the data (e.g., save to database, perform calculations, etc.)
-    
-    # Return a response to the client
-    # return jsonify({'status': 'success', 'message': 'Data received successfully'})
-    
-    # Placeholder: Implement backend logic here
-
-*/

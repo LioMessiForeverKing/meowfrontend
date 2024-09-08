@@ -5,62 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meow Generator</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Basic styling for the image carousel */
-    .carousel {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .carousel-inner {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .carousel-item {
-      min-width: 100%;
-      box-sizing: border-box;
-    }
-
-    .carousel img {
-      width: 100%;
-      height: auto;
-    }
-
-    .carousel-control {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      transform: translateY(-50%);
-    }
-
-    .carousel-control button {
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
   <div class="container">
     <h1>Meow Generator</h1>
 
-    <!-- Persona Section -->
+    <!-- Cat Story Information -->
     <section id="persona">
       <h2>Cat Story Information</h2>
 
       <!-- Story Title Input -->
       <label for="storyTitle">Story Title:</label>
-      <input type="text" id="storyTitle" placeholder="Enter the title of your story">
+      <input type="text" id="storyTitle" placeholder="Enter the title of your cat story">
 
       <!-- Cat Description Input -->
       <label for="catDescription">Cat Description:</label>
-      <textarea id="catDescription" rows="4" placeholder="Describe the cat here..."></textarea>
+      <textarea id="catDescription" rows="4" placeholder="Describe your cat..."></textarea>
 
       <!-- Emotion Input -->
       <label for="emotion">Emotion:</label>
@@ -68,25 +28,22 @@
 
       <!-- Inspiration Story Input -->
       <label for="inspirationStory">Inspiration Story:</label>
-      <textarea id="inspirationStory" rows="4" placeholder="Share an inspiring story here..."></textarea>
+      <textarea id="inspirationStory" rows="4" placeholder="Share an inspiring cat story..."></textarea>
 
       <!-- Number of Parts Input -->
       <label for="numParts">How many Parts?</label>
       <input type="number" id="numParts" placeholder="Enter the number of parts">
 
       <!-- Submit Button -->
-      <button id="submitButton">Submit</button>
+      <button id="submitButton">Generate Meow Story!</button>
     </section>
 
-    <!-- Image Carousel Section -->
+    <!-- Image Carousel -->
     <section id="imageCarousel">
-      <h2>Image Carousel</h2>
+      <h2>Cat Image Carousel</h2>
       <div class="carousel">
         <div class="carousel-inner" id="carouselInner">
-          <!-- Add image URLs here -->
-          <div class="carousel-item"><img src="image1.jpg" alt="Image 1"></div>
-          <div class="carousel-item"><img src="image2.jpg" alt="Image 2"></div>
-          <div class="carousel-item"><img src="image3.jpg" alt="Image 3"></div>
+          <!-- Dynamic image items will be inserted here by JavaScript -->
         </div>
         <div class="carousel-control">
           <button id="prevBtn">❮</button>
@@ -95,43 +52,14 @@
       </div>
     </section>
 
-    <!-- Video Container Section -->
+    <!-- Video Section -->
     <section id="videoContainer">
-      <h2>Video Display Area</h2>
-      <!-- Video content will be displayed here -->
-      <!-- Placeholder for future video content -->
+      <h2>Cat Video Display</h2>
       <div id="videoDisplay"></div>
     </section>
   </div>
 
-  <!-- Include JavaScript for functionality -->
+  <!-- Include JavaScript -->
   <script src="main.js"></script>
-  <script>
-    // JavaScript for carousel functionality
-    const carouselInner = document.getElementById('carouselInner');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    let index = 0;
-
-    function updateCarousel() {
-      const totalItems = document.querySelectorAll('.carousel-item').length;
-      const width = 100 / totalItems;
-      carouselInner.style.transform = `translateX(-${index * width}%)`;
-    }
-
-    prevBtn.addEventListener('click', () => {
-      const totalItems = document.querySelectorAll('.carousel-item').length;
-      index = (index > 0) ? index - 1 : totalItems - 1;
-      updateCarousel();
-    });
-
-    nextBtn.addEventListener('click', () => {
-      const totalItems = document.querySelectorAll('.carousel-item').length;
-      index = (index < totalItems - 1) ? index + 1 : 0;
-      updateCarousel();
-    });
-
-    updateCarousel(); // Initialize carousel
-  </script>
 </body>
 </html>
