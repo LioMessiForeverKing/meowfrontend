@@ -23,22 +23,72 @@ function consoleLogFormData(data) {
   console.log('User Entered Data:', data);
 }
 
+// Separate function to validate the form
+function validateForm(formData) {
+  // Check if all fields are filled
+  if (!formData.storyTitle || !formData.catDescription || !formData.emotion || !formData.inspirationStory || !formData.numParts) {
+    alert('Please fill out all fields');
+    return false;
+  }
+
+  // Check if numParts is a number
+  if (isNaN(formData.numParts)) {
+    alert('Please enter a valid number for the number of parts');
+    return false;
+  }
+
+  return true;
+}
+
 // Function to send data to the backend
 function sendDataToBackend(data) {
-  fetch('http://your-backend-url/endpoint', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data);
-  })
-  .catch((error) => {
-    console.error('Error:', error);
+  // Validate the form data
+  if (!validateForm(data)) {
+    return;
+  }
+
+// This function takes the object data and returns an array of images
+function getImageUrls(data) {
+  // Check if the input is valid
+  if (!data || !Array.isArray(data.script)) {
+    throw new Error('Invalid input data');
+  }
+
+  // Map through the script array and extract the image URLs
+  return data.script.map(scene => {
+    if (scene && typeof scene['Image URL'] === 'string') {
+      return scene['Image URL'];
+    }
+    throw new Error('Invalid scene format');
   });
+}
+
+
+  // Fetch the data from the backend
+  fetch(`http://127.0.0.1:5000/meowGeneration/${data.storyTitle}/${data.catDescription}/${data.emotion}/${data.inspirationStory}/${data.numParts}`)
+    .then(response => response.json())
+    .then(data => {
+      if ("error" in data) {
+        alert("Error: " + data.error);
+        return;
+      } else {
+        alert("Success");
+        console.log(data);
+
+        let imagesArray;
+        imagesArray = getImageUrls(data);
+        // works
+        generateCarouselImages(imagesArray);
+        //alert(imagesArray);
+        
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      alert("Error: " + error);
+    });
+
+  console.log('Sending data to the backend:', data);
 }
 
 // Function to dynamically generate carousel images
