@@ -5,6 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meow Generator</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Basic styling for the image carousel */
+    .carousel {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: auto;
+    }
+
+    .carousel-control {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .carousel-control button {
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -33,6 +73,26 @@
       <!-- Number of Parts Input -->
       <label for="numParts">How many Parts?</label>
       <input type="number" id="numParts" placeholder="Enter the number of parts">
+
+      <!-- Submit Button -->
+      <button id="submitButton">Submit</button>
+    </section>
+
+    <!-- Image Carousel Section -->
+    <section id="imageCarousel">
+      <h2>Image Carousel</h2>
+      <div class="carousel">
+        <div class="carousel-inner" id="carouselInner">
+          <!-- Add image URLs here -->
+          <div class="carousel-item"><img src="image1.jpg" alt="Image 1"></div>
+          <div class="carousel-item"><img src="image2.jpg" alt="Image 2"></div>
+          <div class="carousel-item"><img src="image3.jpg" alt="Image 3"></div>
+        </div>
+        <div class="carousel-control">
+          <button id="prevBtn">❮</button>
+          <button id="nextBtn">❯</button>
+        </div>
+      </div>
     </section>
 
     <!-- Video Container Section -->
@@ -42,10 +102,36 @@
       <!-- Placeholder for future video content -->
       <div id="videoDisplay"></div>
     </section>
-
   </div>
 
-  <!-- Include JavaScript for any future functionality -->
+  <!-- Include JavaScript for functionality -->
   <script src="main.js"></script>
+  <script>
+    // JavaScript for carousel functionality
+    const carouselInner = document.getElementById('carouselInner');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let index = 0;
+
+    function updateCarousel() {
+      const totalItems = document.querySelectorAll('.carousel-item').length;
+      const width = 100 / totalItems;
+      carouselInner.style.transform = `translateX(-${index * width}%)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      const totalItems = document.querySelectorAll('.carousel-item').length;
+      index = (index > 0) ? index - 1 : totalItems - 1;
+      updateCarousel();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      const totalItems = document.querySelectorAll('.carousel-item').length;
+      index = (index < totalItems - 1) ? index + 1 : 0;
+      updateCarousel();
+    });
+
+    updateCarousel(); // Initialize carousel
+  </script>
 </body>
 </html>

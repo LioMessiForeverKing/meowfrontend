@@ -1,7 +1,11 @@
+/* Import Google Font: Bungee Tint */
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap');
+
 /* General Styles */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f9;
+  font-family: 'Bungee Tint', sans-serif; /* Apply Google Font */
+  background: url('background.svg') no-repeat center center fixed;
+  background-size: cover;
   color: #333;
   margin: 0;
   padding: 0;
@@ -77,6 +81,54 @@ textarea {
   overflow: auto; /* Allows scrolling in text areas */
 }
 
+/* Image Carousel Section */
+#imageCarousel {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f0f4f8;
+  border: 1px dashed #4a4a8a;
+  border-radius: 8px;
+  overflow: hidden; /* Prevents overflow */
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.carousel img {
+  width: 100%;
+  height: auto;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.carousel-control button {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
 /* Video Container Section */
 #videoContainer {
   margin-top: 40px;
@@ -101,6 +153,24 @@ textarea {
   content: "Video will be displayed here";
   color: #888;
   font-size: 1rem;
+}
+
+/* Submit Button */
+#submitButton {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #4a4a8a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#submitButton:hover {
+  background-color: #333;
 }
 
 /* Responsive Styles */

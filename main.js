@@ -45,7 +45,7 @@ function sendDataToBackend(data) {
 
 // Event listener for when the user submits the form
 document.addEventListener('DOMContentLoaded', () => {
-  // Assuming there is a button or a form to submit
+  // Assuming there is a button to submit
   const submitButton = document.getElementById('submitButton'); // Replace with actual button ID
 
   if (submitButton) {
